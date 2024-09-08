@@ -1,9 +1,7 @@
 from flask import *
 from forms import *
+from config import app
 import user
-
-app = Flask(__name__)
-
 
 @app.route("/")
 def index():
@@ -12,7 +10,13 @@ def index():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    register = RegisterForm()
+    formulario = RegisterForm()
     
-    user.register_form(register)
+    return user.register_form(formulario)
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    login = LoginForm()
+    
+    return user.login_form(login)
         
