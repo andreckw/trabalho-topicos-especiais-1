@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block corpo %}
+
+    <div class="card-header">
+        <h2> Logar-se </h2>
+    </div>
+
+    <div class="card-body">
+        <form method="POST" action="{{ url_for('login') }}">
+            {{ attr.hidden_tag() }}
+
+            <div class="row">
+                <div class="col-12">
+                    {{ attr.username.label }}
+                    {{ attr.username(class="form-control") }}
+                </div>
+
+                <div class="col-12">
+                    {{ attr.password.label }}
+                    {{ attr.password(class="form-control") }}
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-12" style="text-align: center">
+                    {{ attr.submit(class="btn btn-outline-success") }}
+                </div>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

@@ -12,4 +12,7 @@ pip install flask-login
 
 # Instala flask-sqlalchemy
 pip install -U Flask-SQLAlchemy
+
+# Instala flask-wtf
+pip install -U Flask-WTF
 ```

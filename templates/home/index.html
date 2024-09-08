@@ -2,6 +2,31 @@
 
 {% block corpo %}
 
-    Index pica dmais
+    <!-- Coisa para ter no meio -->
+    <div class="card-header">
+        <h2> Trabalho de python </h2>
+    </div>
+
+    <div class="card-body" style="text-align: center">
+        <div class="row">
+
+            <div class="col-12">
+                <a href="{{ url_for("register") }}" class="btn btn-info">
+                    Cadastrar-se
+                </a>
+            </div>
+
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-12">
+                <a href="{{ url_for("login") }}" class="btn btn-success">
+                    Logar
+                </a>
+            </div>
+        </div>
+    </div>
 
 {% endblock corpo %}
