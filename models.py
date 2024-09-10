@@ -27,4 +27,7 @@ class Tarefa(db.Model):
     status = db.Column(db.Enum(Status), nullable=False)
 
 
-    
+class CompartilharTarefa(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    tarefa_id = db.Column(db.Integer, db.ForeignKey('tarefa.id'), nullable=False)
