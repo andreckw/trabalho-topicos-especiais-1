@@ -1,11 +1,14 @@
 # trabalho-topicos-especiais-1
 Trabalho Python
 
-
 # Comandos importantes
 ```shell
-# Roda a aplicação com as rotas
-flask --app app run
+
+# Cria o venv
+py -3 -m venv .venv
+
+# habilita do venv
+.venv\Scripts\activate
 
 # Instala flask-login
 pip install flask-login
@@ -15,4 +18,11 @@ pip install -U Flask-SQLAlchemy
 
 # Instala flask-wtf
 pip install -U Flask-WTF
+
+# Instala o flask
+pip install flask
+
+# Roda a aplicação
+flask --app main run
+
 ```
