@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+    Dashboard
+{% endblock titulo %}
+
+
+{% block corpo %}
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex">
+                <h2 class="flex-grow-1"> Tarefas </h2>
+
+                <form action="{{ url_for("logout") }}" method="POST">
+                    <button class="btn btn-danger">
+                        Logout
+                    </a>
+                </form>
+            </div>
+
+        </div>
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col">
+                    <h3 class="text-center">Pendentes</h3>
+                    <!-- Colocar para mostrar pendentes -->
+                </div>
+
+                <div class="col">
+                    <h3 class="text-center">Em Andamento</h3>
+                    <!-- Colocar para mostrar em andamento -->
+                </div>
+
+                <div class="col">
+                    <h3 class="text-center">Concluido</h3>
+                    <!-- Colocar para mostrar em concluido -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock corpo %}

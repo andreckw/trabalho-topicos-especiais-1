@@ -1,5 +1,5 @@
 from flask import redirect, render_template, url_for
-from flask_login import login_user
+from flask_login import login_user, logout_user
 from models import User, db
 from forms import LoginForm, RegisterForm
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -35,6 +35,11 @@ def login_form(login: LoginForm):
                 
                 login_user(user)
                 
-                return redirect(url_for("index"))
+                return redirect(url_for("dashboard"))
 
     return render_template("user/login.html", attr=login)
+
+def logout_session():
+    logout_user()
+    
+    return redirect(url_for("index"))
