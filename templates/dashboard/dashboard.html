@@ -14,47 +14,58 @@
                 <form action="{{ url_for("logout") }}" method="POST">
                     <button class="btn btn-danger">
                         Logout
-                    </a>
+                    </button>
                 </form>
             </div>
 
         </div>
-        <div class="card-body">
-            <div class="row">
-
-                <div class="col">
+                <div class="card-body">
                     <div class="row">
-                        <h3 class="text-center">Pendentes</h3>
-                    </div>
 
-                    <div class="row">
                         <div class="col">
-                            Nome da task
-                        </div>
-                        <div class="col">
-                            <a href="" class="btn btn-info">
-                                Editar
-                            </a>
-                        </div>
-                        <div class="col">
-                            <a href="" class="btn btn-danger">
-                                Excluir
-                            </a>
-                        </div>
+                            <div class="row">
+                                <h3 class="text-center">Pendentes</h3>
+                                {% for tarefa in tarefas['pendente'] %}
+                <div class="row">
+                    <div class="col">{{ tarefa.titulo }}</div>
+                    <div class="col"><a href="{{ url_for('edit_task', task_id=tarefa.id) }}" class="btn btn-info">Editar</a></div>
+                    <div class="col"><form method="POST" action="{{ url_for('delete_task', task_id=tarefa.id) }}">
+                                        <button type="submit" class="btn btn-danger">Excluir</button>
+                                    </form>
                     </div>
-                    
                 </div>
+            {% endfor %}
+        </div>
+                    
+
 
                 <div class="col">
                     <h3 class="text-center">Em Andamento</h3>
-                    <!-- Colocar para mostrar em andamento -->
+                    {% for tarefa in tarefas['em_andamento'] %}
+                    <div class="row">
+                            <div class="col">{{ tarefa.titulo }}</div>
+                            <div class="col"><a href="{{ url_for('edit_task', task_id=tarefa.id) }}" class="btn btn-info">Editar</a></div>
+                            <div class="col"><form method="POST" action="{{ url_for('delete_task', task_id=tarefa.id) }}">
+                                                <button type="submit" class="btn btn-danger">Excluir</button>
+                                            </form>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
 
                 <div class="col">
                     <h3 class="text-center">Concluido</h3>
-                    <!-- Colocar para mostrar em concluido -->
+                     {% for tarefa in tarefas['concluido'] %}
+                        <div class="row">
+                            <div class="col">{{ tarefa.titulo }}</div>
+                            <div class="col"><a href="{{ url_for('edit_task', task_id=tarefa.id) }}" class="btn btn-info">Editar</a></div>
+                            <div class="col"><form method="POST" action="{{ url_for('delete_task', task_id=tarefa.id) }}">
+                                                <button type="submit" class="btn btn-danger">Excluir</button>
+                                            </form>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
-            </div>
 
         </div>
     </div>

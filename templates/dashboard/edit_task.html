@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+    Editar Tarefa
+{% endblock titulo %}
+
+{% block corpo %}
+    <div class="card">
+        <div class="card-header">
+            <h2>Editar Tarefa</h2>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ url_for('edit_task', task_id=tarefa.id) }}">
+                {{ form.hidden_tag() }}
+                <div class="mb-3">
+                    {{ form.titulo.label(class="form-label") }}
+                    {{ form.titulo(class="form-control") }}
+                    {% for error in form.titulo.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    {{ form.descricao.label(class="form-label") }}
+                    {{ form.descricao(class="form-control") }}
+                    {% for error in form.descricao.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    {{ form.status.label(class="form-label") }}
+                    {{ form.status(class="form-select") }}
+                    {% for error in form.status.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    {{ form.submit(class="btn btn-primary") }}
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock corpo %}
