@@ -25,6 +25,7 @@ class Tarefa(db.Model):
     titulo = db.Column(db.String, nullable=False)
     descricao = db.Column(db.String, nullable=True)
     status = db.Column(db.Enum(Status), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 
 class CompartilharTarefa(db.Model):
