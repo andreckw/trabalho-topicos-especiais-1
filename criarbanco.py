@@ -1,5 +1,5 @@
 from config import app, db
-from models import User, Tarefa
+from models import User, Tarefa, CompartilharTarefa
 
 
 with app.app_context():
