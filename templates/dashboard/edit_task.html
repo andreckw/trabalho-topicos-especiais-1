@@ -34,7 +34,14 @@
                     {% endfor %}
                 </div>
                 <div class="mb-3">
-                    {{ form.submit(class="btn btn-primary") }}
+                    {{ form.compartilhar.label(class="form-label") }}
+                    {{ form.compartilhar(class="form-control") }}
+                    {% for error in form.compartilhar.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="mb-3">
+                    {{ form.submit_editar(class="btn btn-primary") }}
                 </div>
             </form>
         </div>
