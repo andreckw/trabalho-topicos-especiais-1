@@ -19,4 +19,6 @@ class TaskForm(FlaskForm):
     titulo = StringField('Título da Tarefa', validators=[DataRequired()])
     descricao = TextAreaField('Descrição')
     status = SelectField('Status', choices=[('pendente', 'Pendente'), ('em_andamento', 'Em Andamento'), ('concluido', 'Concluído')])
-    submit = SubmitField('Criar Tarefa')
+    compartilhar = StringField('Nome do usuário')
+    submit_criar = SubmitField('Criar Tarefa')
+    submit_editar = SubmitField('Editar Tarefa')

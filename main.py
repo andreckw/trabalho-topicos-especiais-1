@@ -26,6 +26,7 @@ def login():
 
 
 @app.route("/logout", methods=["POST"])
+@login_required
 def logout():
     return logout_session()
 
@@ -49,28 +50,25 @@ def new_task():
         db.session.commit()
 
         flash('Tarefa criada com sucesso!', 'success')
-        return redirect(url_for('view_dashboard'))
+        return redirect(url_for('dashboard'))
 
     return render_template('dashboard/new_task.html', form=formulario)
 
 
 @app.route("/dashboard", methods=["GET"])
-def view_dashboard():
-    tarefas = {
-        'pendente': Tarefa.query.filter_by(status=Status.pendente, user_id=current_user.id).all(),
-        'em_andamento': Tarefa.query.filter_by(status=Status.em_andamento, user_id=current_user.id).all(),
-        'concluido': Tarefa.query.filter_by(status=Status.concluido, user_id=current_user.id).all()
-    }
-    return render_template('dashboard/dashboard.html', tarefas=tarefas)
+@login_required
+def dashboard():
+    return view_dashboard()
 
 
 @app.route("/tarefa/<int:task_id>/editar", methods=["GET", "POST"])
+@login_required
 def edit_task(task_id):
     tarefa = Tarefa.query.get_or_404(task_id)
 
     if tarefa.user_id != current_user.id:
         flash('Você não tem permissão para editar esta tarefa.', 'danger')
-        return redirect(url_for('view_dashboard'))
+        return redirect(url_for('dashboard'))
 
     formulario = TaskForm(obj=tarefa)
 
@@ -78,23 +76,35 @@ def edit_task(task_id):
         tarefa.titulo = formulario.titulo.data
         tarefa.descricao = formulario.descricao.data
         tarefa.status = Status(formulario.status.data)
+        
+        if formulario.compartilhar.data:
+            user_com = User.query.filter_by(username=formulario.compartilhar.data).first()
+            
+            if user_com:
+                new_compartilhamento = CompartilharTarefa(
+                    user_id=user_com.id, 
+                    tarefa_id=task_id
+                )
+                db.session.add(new_compartilhamento)
+        
         db.session.commit()
         flash('Tarefa atualizada com sucesso!', 'success')
-        return redirect(url_for('view_dashboard'))
+        return redirect(url_for('dashboard'))
 
     return render_template('dashboard/edit_task.html',tarefa=tarefa, form=formulario)
 
 
 @app.route("/tarefa/excluir/<int:task_id>", methods=["POST"])
+@login_required
 def delete_task(task_id):
     tarefa = Tarefa.query.get_or_404(task_id)
 
     if tarefa.user_id != current_user.id:
         flash('Você não tem permissão para excluir esta tarefa.', 'danger')
-        return redirect(url_for('view_dashboard'))
+        return redirect(url_for('dashboard'))
 
     db.session.delete(tarefa)
     db.session.commit()
 
     flash('Tarefa excluída com sucesso!', 'success')
-    return redirect(url_for('view_dashboard'))
+    return redirect(url_for('dashboard'))
