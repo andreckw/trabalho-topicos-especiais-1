@@ -12,14 +12,13 @@ def view_dashboard():
     tarefas_com = CompartilharTarefa.query.filter_by(user_id=current_user.id).all()
     for task in tarefas_com:
         com_task = Tarefa.query.filter_by(id=task.tarefa_id).all()
-        
+
         if com_task[0].status == Status.pendente:
             pendentes.extend(com_task)
         elif com_task[0].status == Status.em_andamento:
             andamento.extend(com_task)
         else:
             concluido.extend(com_task)
-            
     
     tarefas = {
         'pendente': pendentes,

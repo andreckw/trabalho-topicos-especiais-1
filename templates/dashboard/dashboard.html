@@ -58,7 +58,7 @@
                 {% for tarefa in tarefas['em_andamento'] %}
                     <div class="row">
                         <div class="col">{{ tarefa.titulo }}</div>
-                        {% if tarefa.id == current_user.id %}
+                        {% if tarefa.user_id == current_user.id %}
                             <div class="col">
                                 <a href="{{ url_for('edit_task', task_id=tarefa.id) }}" class="btn btn-info">
                                     Editar
@@ -84,7 +84,7 @@
                     {% for tarefa in tarefas['concluido'] %}
                     <div class="row">
                         <div class="col">{{ tarefa.titulo }}</div>
-                        {% if tarefa.id == current_user.id %}
+                        {% if tarefa.user_id == current_user.id %}
                             <div class="col">
                                 <a href="{{ url_for('edit_task', task_id=tarefa.id) }}" class="btn btn-info">
                                     Editar

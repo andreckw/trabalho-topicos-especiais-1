@@ -81,11 +81,12 @@ def edit_task(task_id):
             user_com = User.query.filter_by(username=formulario.compartilhar.data).first()
             
             if user_com:
-                new_compartilhamento = CompartilharTarefa(
-                    user_id=user_com.id, 
-                    tarefa_id=task_id
-                )
-                db.session.add(new_compartilhamento)
+                if user_com.id != current_user.id:
+                    new_compartilhamento = CompartilharTarefa(
+                        user_id=user_com.id,
+                        tarefa_id=task_id
+                    )
+                    db.session.add(new_compartilhamento)
         
         db.session.commit()
         flash('Tarefa atualizada com sucesso!', 'success')
@@ -102,6 +103,12 @@ def delete_task(task_id):
     if tarefa.user_id != current_user.id:
         flash('Você não tem permissão para excluir esta tarefa.', 'danger')
         return redirect(url_for('dashboard'))
+
+    tarefa_com = CompartilharTarefa.query.filter_by(tarefa_id=task_id).all()
+
+    for task in tarefa_com:
+        task_com_delete = CompartilharTarefa.query.filter_by(id=task.id).first()
+        db.session.delete(task_com_delete)
 
     db.session.delete(tarefa)
     db.session.commit()
