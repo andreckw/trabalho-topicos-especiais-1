@@ -58,4 +58,15 @@ pip install -U Flask-WTF
 flask --app main run
 ```
 
+# Funcionamento do programa
 
+Antes de tudo, o usuário deverá rodar os códigos acima.
+
+Logo após, o usuário deverá abrir o endereço que está aparecendo no terminal.
+
+Assim que clicar, irá abrir uma página index no navegador, com as opções de se registrar e logar.
+
+O usuário deve criar uma conta com um login e senha, após isso, com as mesmas informações, conseguirá se logar no site, assim indo para a página do dashboard.
+
+No dashboard, irá ter as opções de criar, editar e excluir uma task. Tanto quando for criar quanto editar, irá ter opções de colocar o nome, uma descrição, indicar se está pendente, em andamento ou concluída.
+Quando for editar, também, terá a opção de compartilhar a task para outro usuário, colocando o nome dele no ultimo campo da página de editar.
